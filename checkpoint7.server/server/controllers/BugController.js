@@ -1,6 +1,7 @@
 import BaseController from '../utils/BaseController'
 import { Auth0Provider } from '@bcwdev/auth0provider'
 import { bugService } from '../services/BugService'
+import { noteService } from '../services/NoteService'
 
 export class BugController extends BaseController {
   constructor() {
@@ -9,6 +10,7 @@ export class BugController extends BaseController {
       .use(Auth0Provider.getAuthorizedUserInfo)
       .get('/', this.getAllBugs)
       .get('/:bugId', this.getOneBug)
+      .get('/:bugId/notes', this.getNotesForBug)
       .post('/', this.createBug)
       .put('/:id', this.editBug)
       .delete('/:id', this.deleteBug)
@@ -37,6 +39,14 @@ export class BugController extends BaseController {
     }
   }
 
+  async getNotesForBug(req, res, next) {
+    try {
+      return res.send(await noteService.getNotesForBug({ bugId: req.params.bugId }))
+    } catch (error) {
+      next(error)
+    }
+  }
+
   async createBug(req, res, next) {
     try {
       req.body.creatorId = req.userInfo.id
@@ -46,6 +56,7 @@ export class BugController extends BaseController {
     }
   }
 
+  // NOTE need to make the edit only happen if the closed attribute is false. Once true, no editing it.
   async editBug(req, res, next) {
     try {
       req.body.creatorId = req.userInfo.id
