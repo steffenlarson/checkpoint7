@@ -7,7 +7,7 @@ class BugService {
     // REVIEW do I want to use the find here? Or is there a better method for getting all of them?
     // Will I want to put a querry here?
     return await dbContext.Bugs.find().populate('creator', 'name id')
-    // REVIEW why am I using the name id in the populate? What is that doing?
+    // REVIEW why am I using the name id in the populate? What is that doing? Is that specifying what gets added on the populate?
   }
 
   async getOneBug(bugId) {
