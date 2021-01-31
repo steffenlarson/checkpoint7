@@ -1,7 +1,6 @@
 import BaseController from '../utils/BaseController'
 import { Auth0Provider } from '@bcwdev/auth0provider'
 import { bugService } from '../services/BugService'
-// FIXME finish the import for bugservice
 
 export class BugController extends BaseController {
   constructor() {
@@ -9,6 +8,7 @@ export class BugController extends BaseController {
     this.router
       .use(Auth0Provider.getAuthorizedUserInfo)
       .get('/', this.getAllBugs)
+      .get('/:bugId', this.getOneBug)
       .post('/', this.createBug)
       // Start with one get and build the whole line of methods
     // get one working, and then once sure it is working move on
@@ -16,12 +16,20 @@ export class BugController extends BaseController {
 
   async getAllBugs(req, res, next) {
     try {
-      // REVIEW I do not need to pass anything here because I am getting every single bug right?
+      // NOTE I do not need to pass anything here because I am getting every single bug right?
       req.body.creatorId = req.userInfo.id
       const bugs = await bugService.getAllBugs()
       res.send(bugs)
 
       // res.send(await bugService.getAllBugs())
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async getOneBug(req, res, next) {
+    try {
+      res.send(await bugService.getOneBug(req.params.bugId))
     } catch (error) {
       next(error)
     }
