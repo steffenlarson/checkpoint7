@@ -11,6 +11,7 @@ export class BugController extends BaseController {
       .get('/:bugId', this.getOneBug)
       .post('/', this.createBug)
       .put('/:id', this.editBug)
+      .delete('/:id', this.deleteBug)
       // Start with one get and build the whole line of methods
     // get one working, and then once sure it is working move on
   }
@@ -50,6 +51,14 @@ export class BugController extends BaseController {
       req.body.creatorId = req.userInfo.id
       req.body.id = req.params.id
       res.send(await bugService.editBug(req.params.id, req.body))
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async deleteBug(req, res, next) {
+    try {
+      res.send(await bugService.deleteBug(req.params.id))
     } catch (error) {
       next(error)
     }

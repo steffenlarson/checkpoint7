@@ -29,6 +29,14 @@ class BugService {
     }
     return newBug
   }
+
+  async deleteBug(id) {
+    const newBug = await dbContext.Bugs.findByIdAndDelete(id)
+    if (!newBug) {
+      throw new BadRequest('No Bug Exists with this Identifier')
+    }
+    return 'Successfully Delorted'
+  }
 }
 
 export const bugService = new BugService()
