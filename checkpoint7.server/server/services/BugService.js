@@ -21,6 +21,14 @@ class BugService {
   async createBug(body) {
     return await dbContext.Bugs.create(body)
   }
+
+  async editBug(bugId, body) {
+    const newBug = await dbContext.Bugs.findOneAndUpdate(bugId, body, { new: true })
+    if (!newBug) {
+      throw new BadRequest('No Bug Exists with this Identifier')
+    }
+    return newBug
+  }
 }
 
 export const bugService = new BugService()
