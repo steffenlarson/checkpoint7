@@ -11,8 +11,8 @@ const Bug = new Schema({
 },
 { timestamps: true, toJSON: { virtuals: true } })
 
-Bug.virtual('author', {
-  localField: 'authorId',
+Bug.virtual('creator', {
+  localField: 'creatorId',
   ref: 'Account',
   foreignField: '_id',
   justOne: true
