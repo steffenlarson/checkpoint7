@@ -7,7 +7,7 @@ export class BugController extends BaseController {
   constructor() {
     super('api/bugs')
     this.router
-      .get('/', this.getAllBugs)
+      .get('', this.getAllBugs)
       .get('/:bugId', this.getOneBug)
       .get('/:id/notes', this.getNotesForBug)
 
@@ -23,7 +23,7 @@ export class BugController extends BaseController {
   async getAllBugs(req, res, next) {
     try {
       // NOTE I do not need to pass anything here because I am getting every single bug right?
-      req.body.creatorId = req.userInfo.id
+      // req.body.creatorId = req.userInfo.id
       const bugs = await bugService.getAllBugs()
       res.send(bugs)
 

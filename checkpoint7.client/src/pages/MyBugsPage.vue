@@ -30,6 +30,7 @@ export default {
     })
     return {
       state
+
     }
   },
   components: {}
