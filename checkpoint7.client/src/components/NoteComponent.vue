@@ -1,13 +1,14 @@
 <template>
-  <div class="NoteComponent">
+  <div class="NoteComponent row m-3">
     <!-- NOTE fix the comment card to always display at col 12 -->
-    <div class="col-12">
+    <div class="col">
       <div class="card">
         <div class="card-body">
           <p class="card-title">
             Comment:
             {{ noteProp.body }}
           </p>
+          <button>Trash me</button>
         </div>
       </div>
     </div>

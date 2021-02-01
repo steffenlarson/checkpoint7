@@ -29,10 +29,28 @@
           </div>
         </div>
       </div>
-      <div class="row">
-        <NoteComponent v-for="note in state.notes" :key="note.id" :note-prop="note" />
+    </div>
+    <div class="row">
+      <div class="col mr-3 text-right">
+        <form type="submit" @submit.prevent="createNote">
+          <div class="form-group text-center">
+            <label for=""></label>
+            <input type="text"
+                   class="form-control"
+                   name="newNote"
+                   v-model="state.newNote.body"
+                   id="board"
+                   aria-describedby="helpId"
+                   placeholder="Comment here!"
+            >
+            <button type="submit" class="btn btn-outline btn-success mt-2">
+              Submit
+            </button>
+          </div>
+        </form>
       </div>
     </div>
+    <NoteComponent v-for="note in state.notes" :key="note.id" :note-prop="note" />
   </div>
 </template>
 
@@ -52,7 +70,8 @@ export default {
     const state = reactive({
       user: computed(() => AppState.user),
       bug: computed(() => AppState.activeBug),
-      notes: computed(() => AppState.notes)
+      notes: computed(() => AppState.notes),
+      newNote: { bug: route.params.id }
     })
     onMounted(async() => {
       try {
@@ -63,7 +82,15 @@ export default {
       }
     })
     return {
-      state
+      state,
+      async createNote() {
+        try {
+          await noteService.createNote(state.newNote)
+          state.newNote = {}
+        } catch (error) {
+          logger.error(error)
+        }
+      }
     }
   },
   components: {}

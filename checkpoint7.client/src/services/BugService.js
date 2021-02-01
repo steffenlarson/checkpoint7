@@ -1,7 +1,6 @@
 import { AppState } from '../AppState'
-import { logger } from '../utils/Logger'
-import { api } from './AxiosService'
 // import { logger } from '../utils/Logger'
+import { api } from './AxiosService'
 
 class BugService {
   async getAllBugs() {
@@ -12,7 +11,7 @@ class BugService {
   async getOneBug(id) {
     const res = await api.get('api/bugs/' + id)
     AppState.activeBug = res.data
-    logger.log('This is the get one', AppState.activeBug)
+    // logger.log('This is the get one', AppState.activeBug)
   }
 
   async createBug(bug) {
