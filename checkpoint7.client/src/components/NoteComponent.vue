@@ -1,5 +1,6 @@
 <template>
   <div class="NoteComponent">
+    <p>THis is a representation of a note on a bug</p>
   </div>
 </template>
 
