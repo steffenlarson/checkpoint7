@@ -10,6 +10,7 @@
                 <p> Title: {{ state.bug.title }}</p>
               </div>
               <div class="col-3">
+                <!-- REVIEW I need to add the populated name from the creator. Do I need to change something in the back end? -->
                 <p>Creator: {{ state.bug.creatorId }}</p>
               </div>
               <div class="col-3">
@@ -22,6 +23,7 @@
                   Description:
                   {{ state.bug.description }}
                 </p>
+                <!-- FIXME Display popup message box here for delete (to close) -->
               </div>
             </div>
           </div>
@@ -37,6 +39,7 @@
 <script>
 import { computed, onMounted, reactive } from 'vue'
 import { bugService } from '../services/BugService'
+import { noteService } from '../services/NoteService'
 import { AppState } from '../AppState'
 import { logger } from '../utils/Logger'
 import { useRoute } from 'vue-router'
@@ -54,6 +57,7 @@ export default {
     onMounted(async() => {
       try {
         await bugService.getOneBug(route.params.id)
+        await noteService.getNotes(AppState.activeBug.id)
       } catch (error) {
         logger.error(error)
       }
