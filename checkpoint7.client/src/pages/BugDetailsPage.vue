@@ -1,14 +1,24 @@
 <template>
   <div class="BugDetailsPage">
-    <p>YOu are now on the bug details page</p>
+    <p>You are now on the bug details page</p>
   </div>
 </template>
 
 <script>
+import { computed, reactive } from 'vue'
+import { AppState } from '../AppState'
 export default {
+
   name: 'BugDetailsPage',
+
   setup() {
-    return {}
+    const state = reactive({
+      user: computed(() => AppState.user),
+      bug: computed(() => AppState.activeBug)
+    })
+    return {
+      state
+    }
   },
   components: {}
 }
