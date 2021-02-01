@@ -1,5 +1,6 @@
 <template>
   <div class="BugDetailsPage">
+    <p>YOu are now on the bug details page</p>
   </div>
 </template>
 

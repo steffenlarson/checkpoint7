@@ -1,14 +1,19 @@
 <template>
-  <div class="BugComponent">
-    <div class="card">
-      <img class="card-img-top" src="holder.js/100x180/" alt="">
-      <div class="card-body">
-        <h4 class="card-title">
-          Title
-        </h4>
-        <p class="card-text">
-          Text
-        </p>
+  <div class="col-12">
+    <div class="BugComponent">
+      <div class="card">
+        <img class="card-img-top" src="holder.js/100x180/" alt="">
+        <div class="card-body">
+          <router-link :to="{name: 'BugDetails', params:{id: bugProp.id}}">
+            <h4 class="card-title">
+              {{ bugProp.title }}
+            </h4>
+          </router-link>
+          <p class="card-text">
+            {{ bugProp.description }}
+          </p>
+          <p>{{ bugProp.closedDate }}</p>
+        </div>
       </div>
     </div>
   </div>
@@ -17,8 +22,13 @@
 <script>
 export default {
   name: 'BugComponent',
-  setup() {
-    return {}
+
+  props: { bugProp: { type: Object, required: true } },
+
+  setup(props) {
+    return {
+
+    }
   },
   components: {}
 }
