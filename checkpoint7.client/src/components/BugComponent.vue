@@ -2,7 +2,6 @@
   <div class="col-12">
     <div class="BugComponent">
       <div class="card">
-        <img class="card-img-top" src="holder.js/100x180/" alt="">
         <div class="card-body">
           <router-link :to="{name: 'BugDetails', params:{id: bugProp.id}}">
             <h4 class="card-title">

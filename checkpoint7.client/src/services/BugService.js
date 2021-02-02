@@ -1,4 +1,5 @@
 import { AppState } from '../AppState'
+import router from '../router'
 import { logger } from '../utils/Logger'
 import { api } from './AxiosService'
 
@@ -17,13 +18,15 @@ class BugService {
   async createBug(bug) {
     const res = await api.post('api/bugs/', bug)
     AppState.bugs.push(res.data)
+    // FIXME help here I do not understand how to set up the router.push    router.push()
+    router.push({ name: 'BugDetails', params: { id: res.data.id } })
     return res.data.id
   }
 
   async editBug(bug) {
     // REVIEW this bug should be coming through as an object with all the stuff on it that I need.
     // The id, description, and the title.
-    // if (bug.closed === false) {
+    // FIXME if (bug.closed === false) {
     // REVIEW this should only do the editing if the closed attribute is false. If it is true it wont send a request.
     debugger
     logger.log('this is the edit bug', bug)
