@@ -30,7 +30,7 @@
         </div>
       </div>
     </div>
-    <div class="row">
+    <div class="row mt-5">
       <div class="col mr-3 text-right">
         <form type="submit" @submit.prevent="createNote">
           <div class="form-group text-center">
@@ -86,7 +86,7 @@ export default {
       async createNote() {
         try {
           await noteService.createNote(state.newNote)
-          state.newNote = {}
+          state.newNote = { bug: route.params.id }
         } catch (error) {
           logger.error(error)
         }

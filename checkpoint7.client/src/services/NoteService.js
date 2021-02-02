@@ -1,5 +1,5 @@
 import { AppState } from '../AppState'
-import { logger } from '../utils/Logger'
+// import { logger } from '../utils/Logger'
 import { api } from './AxiosService'
 
 class NoteService {
@@ -10,11 +10,19 @@ class NoteService {
   }
 
   async createNote(note) {
-    logger.log('this is what is getting passed', note)
+    // logger.log('this is what is getting passed', note)
 
     const res = await api.post('api/notes/', note)
     AppState.notes.push(res.data)
     return res.send
+  }
+
+  async deleteNote(id) {
+    if (confirm('Are you sure?') === true) {
+      await api.delete('api/notes/' + id)
+      const noteInd = AppState.notes.findIndex(note => note.id === id)
+      AppState.notes.splice(noteInd, 1)
+    }
   }
 }
 

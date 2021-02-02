@@ -8,7 +8,9 @@
             Comment:
             {{ noteProp.body }}
           </p>
-          <button>Trash me</button>
+          <button @click="deleteNote">
+            Trash me
+          </button>
         </div>
       </div>
     </div>
@@ -16,11 +18,21 @@
 </template>
 
 <script>
+import { noteService } from '../services/NoteService'
+import { logger } from '../utils/Logger'
 export default {
   name: 'NoteComponent',
   props: { noteProp: { type: Object, required: true } },
-  setup() {
-    return {}
+  setup(props) {
+    return {
+      async deleteNote() {
+        try {
+          noteService.deleteNote(props.noteProp.id)
+        } catch (error) {
+          logger.error(error)
+        }
+      }
+    }
   },
   components: {}
 }
