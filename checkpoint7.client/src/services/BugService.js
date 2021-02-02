@@ -29,5 +29,7 @@ class BugService {
       await api.put('api/bugs/' + bug.id + bug)
     }
   }
+
+  // REVIEW need a delete function (really an edit) to run to flip the bool of closed on button press. Put it insied of a display popup message box
 }
 export const bugService = new BugService()
