@@ -13,6 +13,7 @@
             {{ bugProp.description }}
           </p>
           <p>{{ bugProp.closedDate }}</p>
+          <p>Bug Closed?: {{ bugProp.closed }} </p>
         </div>
       </div>
     </div>
