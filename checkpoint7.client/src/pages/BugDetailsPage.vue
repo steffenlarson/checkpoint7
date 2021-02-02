@@ -144,7 +144,8 @@ export default {
       bug: computed(() => AppState.activeBug),
       notes: computed(() => AppState.notes),
       // REVIEW I will need the id of the bug for the edit function to work. Do I grab it from the route.params.id?
-      editedBug: { },
+      // I need every single instance of edited bug to have the current bugs id on it.
+      editedBug: { id: route.params.id },
       newNote: { bug: route.params.id }
     })
     onMounted(async() => {
@@ -159,7 +160,7 @@ export default {
       state,
       async createNote() {
         try {
-          logger.log('this is the bug object', state.bug)
+          // logger.log('this is the bug object', state.bug)
           await noteService.createNote(state.newNote)
           state.newNote = { bug: route.params.id }
         } catch (error) {
@@ -171,7 +172,9 @@ export default {
         // REVIEW I should be able to pluck the current bugs id out of bug from the state. Or do I need to pluck it from the AppState.
         try {
           logger.log('these are the route parameters should be id', state.bug)
-          await bugService.editBug(state.editedBug, state.bug)
+          logger.log('this is the edited bug object in local', state.editedBug)
+
+          await bugService.editBug(state.editedBug)
         } catch (error) {
           logger.error(error)
         }

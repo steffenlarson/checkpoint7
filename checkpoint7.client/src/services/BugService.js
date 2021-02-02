@@ -23,11 +23,12 @@ class BugService {
   async editBug(bug) {
     // REVIEW this bug should be coming through as an object with all the stuff on it that I need.
     // The id, description, and the title.
-    if (bug.closed === false) {
-      // REVIEW this should only do the editing if the closed attribute is false. If it is true it wont send a request.
-      logger.log('this is the edit bug', bug)
-      await api.put('api/bugs/' + bug.id + bug)
-    }
+    // if (bug.closed === false) {
+    // REVIEW this should only do the editing if the closed attribute is false. If it is true it wont send a request.
+    logger.log('this is the edit bug', bug)
+    await api.put('api/bugs/' + bug.id + bug)
+    // REVIEW I should be passing everything that this edit needs and I do not know why it is not working.
+    // }
   }
 
   // REVIEW need a delete function (really an edit) to run to flip the bool of closed on button press. Put it insied of a display popup message box
