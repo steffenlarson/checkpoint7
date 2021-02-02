@@ -2,46 +2,6 @@
   <div class="BugDetailsPage container-fluid">
     <div class="row m-3">
       <div class="col-12">
-        <!-- Modal -->
-        <!-- <div class="modal fade"
-             id="exampleModalCenter"
-             tabindex="-1"
-             role="dialog"
-             aria-labelledby="exampleModalCenterTitle"
-             aria-hidden="true"
-        >
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">
-                  New List
-                </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <form type="submit" @submit.prevent="editBug">
-                  <div class="form-group">
-                    <label for=""></label>
-                    <input type="text"
-                           class="form-control"
-                           name=""
-                           v-model="state.newBug.title"
-                           id=""
-
-                           aria-describedby="helpId"
-                           placeholder="New List Title"
-                    >
-                  </div>
-                  <button type="submit" class="btn btn-primary">
-                    Create
-                  </button>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div> -->
         <div class="card">
           <div class="card-body">
             <div class="row justify-content-around">
@@ -68,11 +28,18 @@
                 <p>Last updated: {{ state.bug.updatedAt }} </p>
               </div>
             </div>
+            <div class="row">
+              <div class="col">
+                <button @click="closeBug">
+                  Close this bug
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="row">
+    <div class="row" v-if="state.user.isAuthenticated">
       <div class="col">
         <form type="submit" @submit.prevent="editBug">
           <div class="form-group">
@@ -171,13 +138,23 @@ export default {
       async editBug() {
         // REVIEW I should be able to pluck the current bugs id out of bug from the state. Or do I need to pluck it from the AppState.
         try {
-          logger.log('these are the route parameters should be id', state.bug)
-          logger.log('this is the edited bug object in local', state.editedBug)
+          // logger.log('these are the route parameters should be id', state.bug)
+          // logger.log('this is the edited bug object in local', state.editedBug)
           await bugService.editBug(state.editedBug)
         } catch (error) {
           logger.error(error)
         }
+      },
+
+      async closeBug() {
+        try {
+          logger.log('this is the what is being passed to the service', state.bug)
+          await bugService.closeBug(state.bug.id)
+        } catch (error) {
+          logger.error(error)
+        }
       }
+
     }
   },
   components: {}

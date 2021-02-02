@@ -35,5 +35,11 @@ class BugService {
   }
 
   // REVIEW need a delete function (really an edit) to run to flip the bool of closed on button press. Put it insied of a display popup message box
+
+  // FIXME do I need a body for this delete route? Because the delete route actually does an edit.
+  // I need to asign the closed attribute to true with this function. Reasign here.
+  async closeBug(bug) {
+    await api.delete('api/bugs/' + bug)
+  }
 }
 export const bugService = new BugService()

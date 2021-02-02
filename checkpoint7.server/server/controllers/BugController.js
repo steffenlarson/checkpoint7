@@ -71,8 +71,11 @@ export class BugController extends BaseController {
 
   async deleteBug(req, res, next) {
     try {
+      req.body.creatorId = req.userInfo.id
+      req.body.id = req.params.id
+      req.body.closed = true
       // FIXME pass creator Id to make sure they are who created it.
-      res.send(await bugService.deleteBug(req.params.id))
+      res.send(await bugService.deleteBug(req.body))
     } catch (error) {
       next(error)
     }
