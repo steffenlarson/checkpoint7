@@ -28,7 +28,6 @@ class BugService {
     // The id, description, and the title.
     // FIXME if (bug.closed === false) {
     // REVIEW this should only do the editing if the closed attribute is false. If it is true it wont send a request.
-    debugger
     logger.log('this is the edit bug', bug)
     await api.put('api/bugs/' + bug.id, bug)
     // REVIEW I should be passing everything that this edit needs and I do not know why it is not working.

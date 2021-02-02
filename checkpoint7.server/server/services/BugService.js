@@ -23,15 +23,15 @@ class BugService {
   }
 
   async editBug(bugId, body) {
-    const newBug = await dbContext.Bugs.findOneAndUpdate(bugId, body, { new: true })
+    const newBug = await dbContext.Bugs.findOneAndUpdate({ _id: bugId, creatorId: body.creatorId, closed: false }, body, { new: true })
     if (!newBug) {
       throw new BadRequest('No Bug Exists with this Identifier')
     }
     return newBug
   }
 
-  async deleteBug(id) {
-    const newBug = await dbContext.Bugs.findByIdAndDelete(id)
+  async deleteBug(bugId, body) {
+    const newBug = await dbContext.Bugs.findByIdAndUpdate({ _id: bugId, creatorId: body.creatorId, closed: false }, body, { new: true })
     if (!newBug) {
       throw new BadRequest('No Bug Exists with this Identifier')
     }

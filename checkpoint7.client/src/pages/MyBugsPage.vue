@@ -34,6 +34,7 @@
     <div class="row">
       <!-- FIXME add a v-if here, to display if closed == true, add toggle button. Where have I done that before? -->
       <BugComponent v-for="bug in state.bugs" :key="bug.id" :bug-prop="bug" />
+      <!-- <BugComponent v-for="bug in state.filtered" :key="bug.id" :bug-prop="bug" /> -->
     </div>
   </div>
 </template>
@@ -51,6 +52,7 @@ export default {
     const state = reactive({
       user: computed(() => AppState.user),
       bugs: computed(() => AppState.bugs),
+      //
       newBug: {}
     })
     onMounted(async() => {
