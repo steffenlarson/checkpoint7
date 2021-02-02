@@ -39,7 +39,9 @@ class BugService {
   // FIXME do I need a body for this delete route? Because the delete route actually does an edit.
   // I need to asign the closed attribute to true with this function. Reasign here.
   async closeBug(bug) {
-    await api.delete('api/bugs/' + bug)
+    if (confirm('Are you sure?') === true) {
+      await api.delete('api/bugs/' + bug)
+    }
   }
 }
 export const bugService = new BugService()

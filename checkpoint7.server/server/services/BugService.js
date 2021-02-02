@@ -31,6 +31,8 @@ class BugService {
   }
 
   async deleteBug(body) {
+    // NOTE Vaue to check after, go to dbContext the Bugs find the one where the id==the id passed, the creatorId is the passed creatorId, and
+    // the closed attribute==false.  Pass the whole body, and since its an update new: true to return the item.
     const newBug = await dbContext.Bugs.findOneAndUpdate({ _id: body.id, creatorId: body.creatorId, closed: false }, body, { new: true })
     if (!newBug) {
       throw new BadRequest('No Bug Exists with this Identifier, or you are not the author')

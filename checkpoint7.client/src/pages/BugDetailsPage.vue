@@ -22,7 +22,6 @@
                   Description:
                   {{ state.bug.description }}
                 </p>
-                <!-- FIXME Display popup message box here for delete (to close) -->
               </div>
               <div class="col-3">
                 <p>Last updated: {{ state.bug.updatedAt }} </p>
@@ -148,7 +147,7 @@ export default {
 
       async closeBug() {
         try {
-          logger.log('this is the what is being passed to the service', state.bug)
+          // logger.log('this is the what is being passed to the service', state.bug)
           await bugService.closeBug(state.bug.id)
         } catch (error) {
           logger.error(error)

@@ -71,6 +71,7 @@ export class BugController extends BaseController {
 
   async deleteBug(req, res, next) {
     try {
+      // NOTE I am setting all of these values into req.body here. This is where the closed attribute is getting changed to true.
       req.body.creatorId = req.userInfo.id
       req.body.id = req.params.id
       req.body.closed = true
