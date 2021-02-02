@@ -32,6 +32,7 @@
       </div>
     </div>
     <div class="row">
+      <!-- FIXME add a v-if here, to display if closed == true, add toggle button. Where have I done that before? -->
       <BugComponent v-for="bug in state.bugs" :key="bug.id" :bug-prop="bug" />
     </div>
   </div>

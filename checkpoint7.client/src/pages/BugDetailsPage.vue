@@ -173,7 +173,6 @@ export default {
         try {
           logger.log('these are the route parameters should be id', state.bug)
           logger.log('this is the edited bug object in local', state.editedBug)
-
           await bugService.editBug(state.editedBug)
         } catch (error) {
           logger.error(error)
