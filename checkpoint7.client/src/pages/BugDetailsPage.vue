@@ -9,7 +9,8 @@
                 <p> Title: {{ state.bug.title }}</p>
               </div>
               <div class="col-3">
-                <!-- REVIEW I need to add the populated name from the creator. Do I need to change something in the back end? -->
+                <!-- REVIEW I need to add the populated name from the creator. Do I need to change something in the back end?
+                How do I grab that populated attribute here?-->
                 <p>Creator: {{ state.bug.creatorId }}</p>
               </div>
               <div class="col-3">
@@ -112,6 +113,7 @@ export default {
       notes: computed(() => AppState.notes),
       // REVIEW I will need the id of the bug for the edit function to work. Do I grab it from the route.params.id?
       // I need every single instance of edited bug to have the current bugs id on it.
+      // NOTE active bug has the current bugs Id on it.
       editedBug: { id: route.params.id },
       newNote: { bug: route.params.id }
     })
@@ -137,9 +139,8 @@ export default {
 
       async editBug() {
         // REVIEW I should be able to pluck the current bugs id out of bug from the state. Or do I need to pluck it from the AppState.
+        // NOTE grab the whole editedBug object. Pass one thing that has all of the requirements that the edit function needs.
         try {
-          // logger.log('these are the route parameters should be id', state.bug)
-          // logger.log('this is the edited bug object in local', state.editedBug)
           await bugService.editBug(state.editedBug)
         } catch (error) {
           logger.error(error)
@@ -148,7 +149,6 @@ export default {
 
       async closeBug() {
         try {
-          // logger.log('this is the what is being passed to the service', state.bug)
           await bugService.closeBug(state.bug.id)
         } catch (error) {
           logger.error(error)

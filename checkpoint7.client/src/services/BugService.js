@@ -18,7 +18,8 @@ class BugService {
   async createBug(bug) {
     const res = await api.post('api/bugs/', bug)
     AppState.bugs.push(res.data)
-    // FIXME help here I do not understand how to set up the router.push    router.push()
+    // REVIEW help here I do not understand how to set up the router.push    router.push()
+    // NOTE looked at the router links and the router.push to figure this out.
     router.push({ name: 'BugDetails', params: { id: res.data.id } })
     return res.data.id
   }
@@ -26,12 +27,11 @@ class BugService {
   async editBug(bug) {
     // REVIEW this bug should be coming through as an object with all the stuff on it that I need.
     // The id, description, and the title.
-    // FIXME if (bug.closed === false) {
-    // REVIEW this should only do the editing if the closed attribute is false. If it is true it wont send a request.
+    // this should only do the editing if the closed attribute is false. If it is true it wont send a request.
     logger.log('this is the edit bug', bug)
     await api.put('api/bugs/' + bug.id, bug)
     // REVIEW I should be passing everything that this edit needs and I do not know why it is not working.
-    // }
+    // NOTE SOLUTION: Need to use the '+' to append the id onto the url. then place a ',' to add the body.
   }
 
   // REVIEW need a delete function (really an edit) to run to flip the bool of closed on button press. Put it insied of a display popup message box

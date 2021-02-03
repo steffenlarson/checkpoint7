@@ -10,7 +10,8 @@ class NoteService {
   }
 
   async deleteNote(body) {
-    // FIXME how do I lock this down? I thought that I did with the object being passed. But I think I can delete other peoples comments.
+    // REVIEW how do I lock this down? I thought that I did with the object being passed. But I think I can delete other peoples comments.
+    // NOTE use findOneAndDelete to pass multiple parameters instead of findbyId
     const note = await dbContext.Notes.findOneAndDelete({ _id: body.id, creatorId: body.creatorId })
     if (!note) {
       throw new BadRequest('Note Identifier is invalid or you are not the creator')
