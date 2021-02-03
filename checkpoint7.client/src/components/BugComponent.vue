@@ -12,7 +12,7 @@
             {{ bugProp.description }}
           </p>
           <p>{{ bugProp.closedDate }}</p>
-          <!-- REVIEW add a conditional style turnary expression. help with this. To grab and apply one class while this is true, or another if false. -->
+          <!-- REVIEW how does this turnary work? I got the styling to work a different way I still want to know and understand how the turnary works. -->
           <div :class="bugProp.closed ? activeClass : '' ">
             <p v-if="bugProp.closed==true" class="activeClass">
               Bug Closed?: {{ bugProp.closed }}
