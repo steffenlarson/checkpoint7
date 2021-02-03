@@ -12,9 +12,8 @@
             {{ bugProp.description }}
           </p>
           <p>{{ bugProp.closedDate }}</p>
-          <div :class="{}">
-            <p>Bug Closed?: {{ bugProp.closed }} </p>
-          </div>
+          <!-- REVIEW add a conditional style turnary expression. help with this. To grab and apply one class while this is true, or another if false. -->
+          <p>Bug Closed?: {{ bugProp.closed }} </p>
         </div>
       </div>
     </div>
