@@ -38,6 +38,7 @@
         </div>
       </div>
     </div>
+    <!-- REVIEW I want these elements (the edit form and the close bug button to disappear if the user does not match the ) -->
     <div class="row" v-if="state.user.isAuthenticated">
       <div class="col">
         <form type="submit" @submit.prevent="editBug">
