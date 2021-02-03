@@ -32,10 +32,8 @@ export class NoteController extends BaseController {
 
       // FIXME need help or have questions here how do I make sure that the user is the creator? I think I am on the right track...
       req.body.creatorId = req.userInfo.id
-      // if (req.userInfo.id !=== res.body.creatorId) {
-      //   throw new BadRequest('You are not the creator')
-      // }
-      res.send(await noteService.deleteNote(req.params.id))
+      req.body.id = req.params.id
+      res.send(await noteService.deleteNote(req.body))
     } catch (error) {
       next(error)
     }

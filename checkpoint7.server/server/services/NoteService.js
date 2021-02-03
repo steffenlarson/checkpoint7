@@ -9,8 +9,9 @@ class NoteService {
     return await dbContext.Notes.create(body)
   }
 
-  async deleteNote(id) {
-    const note = await dbContext.Notes.findByIdAndDelete(id)
+  async deleteNote(body) {
+    // FIXME how do I lock this down? I thought that I did with the object being passed. But I think I can delete other peoples comments.
+    const note = await dbContext.Notes.findOneAndDelete({ _id: body.id, creatorId: body.creatorId })
     if (!note) {
       throw new BadRequest('Note Identifier is invalid or you are not the creator')
     }

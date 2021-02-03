@@ -30,11 +30,21 @@
           </div>
         </form>
       </div>
+      <div class="col2">
+        <button @click="state.boolValue = !state.boolValue">
+          Toggle Sort
+        </button>
+      </div>
     </div>
     <div class="row">
       <!-- FIXME FILTER HERE add a v-if here, to display if closed == true, add toggle button. Where have I done that before? -->
+      <!-- REVIEW I need to know how to set up this filter. I am really lost.  -->
+      <!-- <div v-if="state.boolValue == false"> -->
       <BugComponent v-for="bug in state.bugs" :key="bug.id" :bug-prop="bug" />
-      <!-- <BugComponent v-for="bug in state.filtered" :key="bug.id" :bug-prop="bug" /> -->
+      <!-- </div>
+      <div v-else>
+        <BugComponent v-for="bug in state.bugs.filter(bugs.closed == true)" :key="bug.id" :bug-prop="bug" />
+      </div> -->
     </div>
   </div>
 </template>
@@ -53,6 +63,7 @@ export default {
       user: computed(() => AppState.user),
       bugs: computed(() => AppState.bugs),
       //
+      boolValue: false,
       newBug: {}
     })
     onMounted(async() => {
