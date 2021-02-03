@@ -13,7 +13,14 @@
           </p>
           <p>{{ bugProp.closedDate }}</p>
           <!-- REVIEW add a conditional style turnary expression. help with this. To grab and apply one class while this is true, or another if false. -->
-          <p>Bug Closed?: {{ bugProp.closed }} </p>
+          <div :class="bugProp.closed ? activeClass : '' ">
+            <p v-if="bugProp.closed==true" class="activeClass">
+              Bug Closed?: {{ bugProp.closed }}
+            </p>
+            <p v-else-if="bugProp.closed==false" class="denied">
+              Bug Closed?: {{ bugProp.closed }}
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -36,5 +43,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.activeClass {
+  color: green;
+}
+.denied{
+  color: red;
+}
 </style>
